@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./dist/assets/icons/icon128.png" alt="Web Extension Template" \>
+<img src="./dist/assets/icon.jpeg" alt="Web Extension Template" \>
 </div>
 
 # Playground Thing
