@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
 
-  "name": "Web-Extension-Template",
-  "description": "Chrome Extension using TypeScript",
+  "name": "Playground Thing",
+  "description": "Elevate your OpenAi Playground experience.",
   "version": "1.0",
-  "author": "Divyanshu Shekhar",
+  "author": "Matěj Pešl",
 
   "icons": {
     "16": "assets/icons/icon16.png",
@@ -17,9 +17,13 @@
     "default_popup": "popup.html"
   },
 
-  "permissions": ["storage"],
-
-  "host_permissions": ["*://*.example.com/*"],
+  "permissions": ["scripting"],
+  "content_scripts": [
+    {
+      "matches": ["https://platform.openai.com/playground?mode=chat"],
+      "js": ["scripts/content_script.js"]
+    }
+  ],
 
   "commands": {
     "_execute_action": {

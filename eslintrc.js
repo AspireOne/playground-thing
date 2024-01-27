@@ -18,8 +18,6 @@ export default {
     "plugin:import/typescript",
     "plugin:jsx-a11y/recommended",
     "plugin:eslint-comments/recommended",
-    "prettier",
-    "plugin:prettier/recommended"
   ],
   plugins: ["react", "jest"],
   rules: {

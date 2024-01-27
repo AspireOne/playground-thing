@@ -10,6 +10,6 @@ chrome.tabs.query({ active: true, currentWindow: true }, () => {
   root.render(
     <StrictMode>
       <Popup />
-    </StrictMode>
+    </StrictMode>,
   );
 });

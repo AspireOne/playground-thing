@@ -15,7 +15,7 @@ Template for developing Chrome Web Extension using TypeScript.
 * React
 * Jest
 * ES Lint
-* Prettier
+* Biome
 * Husky
 * Example
   * Popup (Hello World)
