@@ -13,9 +13,8 @@
   },
   "homepage": "https://github.com/aspireone/playground-thing#readme",
   "scripts": {
-    "dev": "webpack --config webpack/webpack.config.js --env env=dev",
+    "dev": "webpack -w --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
-    "dev:watch": "webpack -w --config webpack/webpack.config.js --env env=dev",
     "clean": "rimraf dist",
 
     "lint": "biome lint --apply-unsafe ./src",
