@@ -1,5 +1,5 @@
 import { injectStyles } from "./styles";
-import { log, logErr } from "./utils";
+import { log, logErr, logWarn } from "./utils";
 import { runAppLoop } from "./appLoop";
 
 type Action = {
@@ -22,9 +22,12 @@ const actions: Action[] = [
 ];
 
 let initialized = false;
-function initialize() {
+async function initialize() {
   if (initialized) return;
   initialized = true;
+
+  log("Waiting for the page to fully load...");
+  await waitUntilLoaded();
 
   log("Initializing...");
   for (const { description, func } of actions) {
@@ -38,8 +41,30 @@ function initialize() {
 }
 
 /** Initialize the playground when the page is loaded. */
-document.addEventListener("DOMContentLoaded", () => setTimeout(initialize, 2000));
-window.addEventListener("load", () => setTimeout(initialize, 2000));
+window.addEventListener("load", initialize);
+
+async function waitUntilLoaded() {
+  let maxWaitTime = 4_000;
+  while (true) {
+    if (isPageLoaded()) break;
+    if (maxWaitTime < 0) {
+      logWarn("Page load check timed out. Proceeding as if page was loaded.");
+      break;
+    }
+
+    maxWaitTime -= 40;
+    await new Promise((resolve) => setTimeout(resolve, 40));
+  }
+}
+
+function isPageLoaded() {
+  return (
+    document.querySelectorAll(".chat-pg-message").length > 0 &&
+    document.querySelector(".chat-pg-instructions textarea") &&
+    document.querySelector(".chat-pg-exchange-container") &&
+    document.querySelector(".chat-pg-exchange-container")!.children.length >= 1
+  );
+}
 
 /** Sets the output tokens slider to the max value. */
 function setOutputTokensToMax() {
@@ -85,7 +110,7 @@ function addTextboxRefocusHook() {
     const lastUserMessage = userMessages[userMessages.length - 1];
     const lastMessage = allMessages[allMessages.length - 1];
     const isLastMessageAi = false; // TODO: check if last message is AI.
-    
+
     if (!lastUserMessage || !lastMessage) {
       throw new Error("No last message found. This should not happen");
     }

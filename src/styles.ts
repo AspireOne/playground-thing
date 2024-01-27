@@ -10,6 +10,10 @@ const headStyles = `
       color: #fff !important;
     }
     
+    div:has(> .chat-pg-instructions) {
+      max-width: 220px
+    }
+    
     body {
       scroll-behavior: smooth;
       overflow: hidden;
