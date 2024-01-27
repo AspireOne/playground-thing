@@ -1,21 +1,21 @@
 {
-  "name": "web-extension-template",
+  "name": "Playground Thing",
   "version": "1.0.0",
-  "description": "Template for developing web extenstion using TypeScript",
+  "description": "Elevate your OpenAi playground experience.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/divshekhar/web-extension-template.git"
   },
-  "author": "Divyanshu Shekhar",
+  "author": "Matěj Pešl",
   "license": "Apache",
   "bugs": {
-    "url": "https://github.com/divshekhar/web-extension-template/issues"
+    "url": "https://github.com/aspireone/playground-thing/issues"
   },
-  "homepage": "https://github.com/divshekhar/web-extension-template#readme",
+  "homepage": "https://github.com/aspireone/playground-thing#readme",
   "scripts": {
-    "start": "webpack --config webpack/webpack.config.js --env env=dev",
+    "dev": "webpack --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
-    "watch": "webpack -w --config webpack/webpack.config.js --env env=dev",
+    "dev:watch": "webpack -w --config webpack/webpack.config.js --env env=dev",
     "clean": "rimraf dist",
     "test": "jest",
     "test:watch": "jest --watch",
