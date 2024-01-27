@@ -82,19 +82,23 @@ function addTextboxRefocusHook() {
       (m) => m.querySelector(".chat-message-role-text")?.textContent === "user",
     );
 
-    const lastUserMessage = userMessages?.length >= 1 && userMessages[userMessages.length - 1];
-
-    if (!lastUserMessage) {
-      throw new Error("No last user message found. This should not happen");
+    const lastUserMessage = userMessages[userMessages.length - 1];
+    const lastMessage = allMessages[allMessages.length - 1];
+    const isLastMessageAi = false; // TODO: check if last message is AI.
+    
+    if (!lastUserMessage || !lastMessage) {
+      throw new Error("No last message found. This should not happen");
     }
-
-    log("Refocusing user message", lastUserMessage);
 
     const textarea = lastUserMessage.querySelector("textarea");
+
     if (!textarea) {
-      throw new Error("No textarea found in last user message. This should not happen");
+      throw new Error(
+        "No textarea found in last user message. Could not refocus. This should not happen",
+      );
     }
-    textarea.focus();
+
+    if (!isLastMessageAi) textarea.focus();
   });
 }
 

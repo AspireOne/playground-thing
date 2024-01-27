@@ -40,7 +40,7 @@ export function runAppLoop() {
       initNewAiMessage(textarea);
       anyAiMessageChanged = true;
     } else {
-      const changed = msgList[textarea.dataset.id!].length.toString() !== textarea.value;
+      const changed = msgList[textarea.dataset.id!].length !== textarea.value.length;
       if (!changed) return;
       updateAiMessage(textarea as any);
       anyAiMessageChanged = true;
@@ -54,7 +54,7 @@ function updateSpeed(anyMessageChanged: boolean) {
   if (anyMessageChanged) {
     noChangeCount = 0;
     if (speed === "slow") {
-      console.log("Generation detected, speeding up interval of updating markdown.");
+      log("Generation detected, speeding up interval of updating markdown.");
       speed = "fast";
       clearInterval(appLoopInterval);
       appLoopInterval = setInterval(runAppLoop, 200);
@@ -64,7 +64,7 @@ function updateSpeed(anyMessageChanged: boolean) {
   else {
     ++noChangeCount;
     if (noChangeCount >= 12 && speed === "fast") {
-      console.log("No generation detected, slowing down interval of updating markdown.");
+      log("No generation detected, slowing down interval of updating markdown.");
       speed = "slow";
       clearInterval(appLoopInterval);
       appLoopInterval = setInterval(runAppLoop, 2000);
@@ -88,7 +88,6 @@ function addUserMsgSaveCursorHook(area: HTMLTextAreaElement) {
 
 function addUserMsgRestoreCursorHook(area: HTMLTextAreaElement) {
   area.addEventListener("focus", () => {
-    log("Restoring user message cursor position.");
     const cursorPos = area.dataset.cursorPos;
     if (cursorPos) {
       area.selectionStart = parseInt(cursorPos);
