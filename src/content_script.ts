@@ -102,14 +102,15 @@ function prefillSystemPrompt(prompt: string) {
 /** Adds a hook to focus on input textbox when switching back to playground. */
 function addTextboxRefocusHook() {
   window.addEventListener("focus", () => {
-    const allMessages = document.querySelectorAll(".chat-pg-message");
+    const allMessages = document.querySelectorAll(".chat-pg-message:not(.add-message)");
     const userMessages = Array.from(allMessages).filter(
       (m) => m.querySelector(".chat-message-role-text")?.textContent === "user",
     );
 
     const lastUserMessage = userMessages[userMessages.length - 1];
     const lastMessage = allMessages[allMessages.length - 1];
-    const isLastMessageAi = false; // TODO: check if last message is AI.
+    const isLastMessageAi = lastUserMessage !== lastMessage;
+    console.log("isLastMessageAi", isLastMessageAi);
 
     if (!lastUserMessage || !lastMessage) {
       throw new Error("No last message found. This should not happen");
