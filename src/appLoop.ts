@@ -108,7 +108,6 @@ function initNewUserMessage(area: HTMLTextAreaElement) {
 function updateAiMessage(area: HTMLTextAreaElement & { dataset: { id: string } }) {
   // if the value is different, update it (so that we can compare it next time).
   msgList[area.dataset.id] = area.value;
-  log("Applying markdown to A.I. message.");
   // if the textarea is not focused, apply markdown.
   if (document.activeElement !== area) applyMarkdown(area);
 }
