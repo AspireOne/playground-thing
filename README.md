@@ -47,3 +47,5 @@ A small extension that elevates the OpenAi Playground experience.
 * Webpack
 * React support
 * Typescript
+
+![screenshot](https://github.com/AspireOne/playground-thing/assets/57546404/0832e53d-70cf-4d4f-bfaa-d21195a2f959)
